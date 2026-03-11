@@ -1,116 +1,143 @@
 import React, { useState } from 'react';
 
-const OffDayFinal = () => {
-  const [activeCategory, setActiveCategory] = useState('전체');
-
-  // 브랜드 제품류 카테고리 정의 
-  const categories = ['전체', '메인식사류', '반찬류', '사이드류', '단품식사류', '간식&스낵류', '소스류'];
-
+const OffDayMain = () => {
+  // 사용자가 선택한 제품 카테고리 상태 (6가지 제품류 반영)
+  const categories = ['메인식사류', '반찬류', '사이드류', '단품식사류', '간식&스낵류', '소스류'];
+  
   return (
     <div className="min-h-screen bg-[#FDFBF8] text-[#1A1A1A] font-sans">
-      {/* 1. Navigation: 심볼 + 문구 결합형 (속도감 컨셉) */}
-      <nav className="flex justify-between items-center px-6 py-5 bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-[#EEE]">
+      {/* 1. Navigation: 로고 및 카테고리 퀵 메뉴 */}
+      <nav className="flex justify-between items-center px-8 py-6 bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-[#F0EBE3]">
         <div className="flex items-center gap-2 group cursor-pointer">
-          <div className="relative">
-            {/* 심볼: 간편하고 빠른 조리를 형상화한 그래픽 [cite: 20] */}
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" className="group-hover:translate-x-1 transition-transform">
-              <path d="M3 14a7 7 0 0 0 14 0H3z" /> {/* 그릇 심볼 */}
-              <path d="M14 6l2-2M10 7l2-2M18 5l2-2" className="stroke-[#FF5C00]" /> {/* 포인트 오렌지 속도감 */}
-            </svg>
-          </div>
-          <span className="text-2xl font-black tracking-tighter italic">offday</span>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" className="group-hover:translate-x-1 transition-transform">
+            <path d="M3 14a7 7 0 0 0 14 0H3z" />
+            <path d="M14 6l2-2M10 7l2-2M18 5l2-2" className="stroke-[#FF5C00]" />
+          </svg>
+          <span className="text-2xl font-black italic tracking-tighter">offday</span>
         </div>
-        <div className="hidden lg:flex gap-6 text-sm font-bold uppercase tracking-tight">
-          {categories.slice(1).map(cat => (
+        <div className="hidden lg:flex gap-8 text-xs font-bold uppercase tracking-widest text-gray-500">
+          {categories.map(cat => (
             <a key={cat} href={`#${cat}`} className="hover:text-[#FF5C00] transition-colors">{cat}</a>
           ))}
         </div>
       </nav>
 
-      {/* 2. Hero Section: 지금은 OFF [cite: 50, 51, 54] */}
-      <section className="relative px-6 py-24 flex flex-col items-center text-center bg-gradient-to-b from-white to-[#FDFBF8]">
-        <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-[#FF5C00]/10 text-[#FF5C00] text-sm font-bold italic">
-          지금은 OFF
+      {/* 2. Hero Section: 요청하신 메인 문구 적용 [cite: 12, 54] */}
+      <section className="relative px-8 py-28 md:py-40 flex flex-col items-center text-center overflow-hidden">
+        {/* 슬로건 태그  */}
+        <div className="inline-block px-4 py-1.5 mb-8 rounded-full bg-[#FF5C00]/10 text-[#FF5C00] text-sm font-black tracking-[0.3em]">
+          [지금은 OFF]
         </div>
-        <h1 className="text-5xl md:text-7xl font-black mb-8 leading-[1.1]">
-          일상에 스며드는 <br /> 
-          <span className="text-[#FF5C00]">따뜻한 온기</span>
+        
+        {/* 메인 헤드라인 [cite: 12, 50, 51] */}
+        <h1 className="text-5xl md:text-8xl font-black mb-10 leading-[1.05] tracking-tight">
+          바쁜 하루 속 <br /> 
+          <span className="italic">잠시 쉬어가는 시간</span>
         </h1>
-        <p className="text-gray-500 max-w-lg leading-relaxed mb-10">
-          바쁜 하루 속 잠시 쉬어가는 시간. [cite: 12] <br />
-          번거로운 준비 없이, 10분 만에 완성되는 정갈한 한 끼를 경험하세요. [cite: 20]
+        
+        {/* 서브 슬로건 [cite: 12, 52] */}
+        <p className="text-gray-500 text-lg md:text-2xl max-w-2xl leading-relaxed mb-12 font-medium">
+          간편하지만 따뜻한 한 끼로 마무리하는 하루
         </p>
-        <button className="bg-black text-white px-12 py-5 rounded-xl font-bold hover:scale-105 transition-transform shadow-xl shadow-black/10">
-          오늘의 OFF 메뉴 찾기
+
+        <button className="bg-black text-white px-14 py-5 rounded-full font-bold text-lg hover:bg-[#FF5C00] transition-all shadow-2xl shadow-black/10">
+          온기 채우러 가기
         </button>
+
+        {/* 배경 디자인 요소: 일상에 스며드는 따뜻한 빛 */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FF5C00]/5 rounded-full blur-[120px] -z-10"></div>
       </section>
 
-      {/* 3. Category Filter: 제품류 분류  */}
-      <section className="px-6 py-12">
-        <div className="flex overflow-x-auto gap-3 pb-4 no-scrollbar">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-bold transition-all ${
-                activeCategory === cat ? 'bg-black text-white' : 'bg-white border border-[#DDD] text-gray-400'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* 4. Product Grid: 와이어프레임 데이터 반영 [cite: 48, 55, 62, 74, 84] */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-          {[
-            { name: '심도깊은 된장찌개', price: '12,900', type: '메인식사류', img: '🥘' },
-            { name: '무말랭이 무침', price: '4,500', type: '반찬류', img: '🥗' },
-            { name: '빠사삭 감자채전', price: '9,800', type: '사이드류', img: '🥞' },
-            { name: '김치 볶음밥 세트', price: '15,000', type: '단품식사류', img: '🍛' },
-            { name: '구운 계란(2알)', price: '2,500', type: '간식&스낵류', img: '🥚' },
-            { name: '특제 막침소스', price: '6,000', type: '소스류', img: '🍯' },
-            { name: '따뜻한 단호박죽', price: '7,900', type: '단품식사류', img: '🥣' },
-            { name: '궁중 소고기 장조림', price: '6,500', type: '반찬류', img: '🍖' },
-          ].filter(p => activeCategory === '전체' || p.type === activeCategory).map((product, i) => (
-            <div key={i} className="group bg-white p-4 rounded-2xl border border-[#F0F0F0] hover:shadow-lg transition-all">
-              <div className="aspect-square bg-[#F9F9F9] rounded-xl mb-4 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">
-                {product.img}
-              </div>
-              <p className="text-[10px] font-bold text-[#FF5C00] mb-1 uppercase tracking-widest">{product.type}</p>
-              <h3 className="font-bold text-sm mb-1">{product.name}</h3>
-              <p className="text-lg font-black">{product.price}원</p>
-              <button className="w-full mt-4 py-2 border border-black rounded-lg text-xs font-bold hover:bg-black hover:text-white transition-colors">
-                담기 +
-              </button>
+      {/* 3. Product Categories Section  */}
+      <section className="px-8 py-24 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <h2 className="text-3xl font-black mb-3">일상에 스며드는 온기 [cite: 51]</h2>
+              <p className="text-gray-400">정갈하게 준비된 offday의 제품군을 만나보세요.</p>
             </div>
-          ))}
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {categories.map((cat, i) => (
+              <div key={i} className="group cursor-pointer flex flex-col items-center">
+                <div className="w-full aspect-square bg-[#FDFBF8] rounded-3xl mb-4 border border-[#F0EBE3] flex items-center justify-center group-hover:border-[#FF5C00] transition-all">
+                  <span className="text-3xl group-hover:scale-125 transition-transform">
+                    {['🥘', '🥗', '🥞', '🍛', '🥚', '🍯'][i]}
+                  </span>
+                </div>
+                <span className="text-xs font-black text-gray-400 group-hover:text-black uppercase tracking-tighter">{cat}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 5. Footer */}
-      <footer className="bg-white px-6 py-16 border-t border-[#EEE]">
-        <div className="flex flex-col md:flex-row justify-between gap-10">
+      {/* 4. Best Deals: 와이어프레임 기반 상품 [cite: 47, 48, 74, 62] */}
+      <section className="px-8 py-24">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-2xl font-black mb-12 italic">Today's Best OFF [cite: 47]</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {/* 상품 예시: 된장찌개 [cite: 48] */}
+            <div className="bg-white p-6 rounded-[40px] border border-[#F0EBE3] hover:shadow-xl transition-all">
+              <div className="aspect-[4/5] bg-[#F9F9F9] rounded-[30px] mb-6 flex items-center justify-center text-5xl">🥘</div>
+              <p className="text-[#FF5C00] font-bold text-xs mb-2 uppercase italic">Main Meal [cite: 49]</p>
+              <h4 className="text-xl font-black mb-2">심도깊은 된장찌개 [cite: 48, 60]</h4>
+              <p className="text-gray-400 text-sm mb-6 font-medium tracking-tight italic">수고한 당신을 위한 정갈한 한 끼 [cite: 50]</p>
+              <div className="flex justify-between items-center">
+                <span className="text-2xl font-black">12,900원 [cite: 65]</span>
+                <button className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-bold">+</button>
+              </div>
+            </div>
+            
+            {/* 상품 예시: 단호박죽 [cite: 74] */}
+            <div className="bg-white p-6 rounded-[40px] border border-[#F0EBE3] hover:shadow-xl transition-all">
+              <div className="aspect-[4/5] bg-[#F9F9F9] rounded-[30px] mb-6 flex items-center justify-center text-5xl">🥣</div>
+              <p className="text-[#FF5C00] font-bold text-xs mb-2 uppercase italic">Single Meal [cite: 64]</p>
+              <h4 className="text-xl font-black mb-2">따뜻한 단호박죽 [cite: 73, 74]</h4>
+              <p className="text-gray-400 text-sm mb-6 font-medium tracking-tight italic">밤에도 부담 없는 가벼운 위로 [cite: 75]</p>
+              <div className="flex justify-between items-center">
+                <span className="text-2xl font-black">8,500원</span>
+                <button className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-bold">+</button>
+              </div>
+            </div>
+
+            {/* 상품 예시: 감자채전 [cite: 62] */}
+            <div className="bg-white p-6 rounded-[40px] border border-[#F0EBE3] hover:shadow-xl transition-all">
+              <div className="aspect-[4/5] bg-[#F9F9F9] rounded-[30px] mb-6 flex items-center justify-center text-5xl">🥞</div>
+              <p className="text-[#FF5C00] font-bold text-xs mb-2 uppercase italic">Side Dish [cite: 56, 67]</p>
+              <h4 className="text-xl font-black mb-2">빠사삭 감자채전 [cite: 62]</h4>
+              <p className="text-gray-400 text-sm mb-6 font-medium tracking-tight italic">혼술의 품격을 높여주는 바삭함 [cite: 77]</p>
+              <div className="flex justify-between items-center">
+                <span className="text-2xl font-black">11,000원</span>
+                <button className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-bold">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Footer [cite: 96] */}
+      <footer className="px-8 py-20 bg-white border-t border-[#F0EBE3]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
           <div>
-            <h2 className="text-3xl font-black italic mb-4">offday</h2>
-            <p className="text-gray-400 text-sm max-w-xs">
-              바쁜 현대인을 위해 정갈한 온기를 전하는 간편식 브랜드입니다. [cite: 20]
+            <h2 className="text-4xl font-black italic tracking-tighter mb-6">offday</h2>
+            <p className="text-gray-400 max-w-xs leading-relaxed font-medium">
+              우리는 바쁜 일상 속에서도 당신이 따뜻한 온기를 잃지 않기를 바랍니다. [cite: 51]
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-12">
+          <div className="flex gap-20">
             <div>
-              <h4 className="font-bold text-xs uppercase mb-4 text-[#FF5C00]">Products</h4>
-              <ul className="text-sm space-y-2 text-gray-500">
-                <li>메인식사</li>
-                <li>반찬/사이드</li>
-                <li>소스/간식</li>
+              <h5 className="font-black text-[#FF5C00] mb-6 tracking-widest text-xs uppercase">Category [cite: 49, 56, 64]</h5>
+              <ul className="space-y-3 text-sm font-bold text-gray-500">
+                {categories.slice(0, 3).map(c => <li key={c} className="hover:text-black cursor-pointer">{c}</li>)}
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-xs uppercase mb-4 text-[#FF5C00]">About</h4>
-              <ul className="text-sm space-y-2 text-gray-500">
-                <li>브랜드 스토리</li>
-                <li>문의하기</li>
+              <h5 className="font-black text-[#FF5C00] mb-6 tracking-widest text-xs uppercase">Support</h5>
+              <ul className="space-y-3 text-sm font-bold text-gray-500">
+                <li className="hover:text-black cursor-pointer">이용약관</li>
+                <li className="hover:text-black cursor-pointer">개인정보처리방침</li>
               </ul>
             </div>
           </div>
@@ -120,4 +147,4 @@ const OffDayFinal = () => {
   );
 };
 
-export default OffDayFinal;
+export default OffDayMain;
